@@ -7,4 +7,43 @@
 
   <project path="manifest" name="platform_manifest" remote="sepha" />
 
+  <!-- build -->
+  <project path="build/make" name="platform_build" remote="sepha" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="platform_build_soong" remote="sepha" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <!-- hardware - caf -->
+  <project path="hardware/qcom-caf/bootctrl" name="platform_hardware_qcom-caf_bootctrl" remote="sepha" />
+  <project path="hardware/qcom-caf/common" name="platform_hardware_qcom-caf_common" remote="sepha" >
+    <!-- add guard for AOSP hardware/qcom dir -->
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <!-- add guards for CAF repositories -->
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8150/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8150/Android.mk" />
+  </project>
+  <project path="hardware/qcom-caf/sm8150/audio" name="platform_hardware_qcom-caf_audio" revision="sirocco-sm8150" remote="sepha" />
+  <project path="hardware/qcom-caf/sm8150/display" name="platform_hardware_qcom-caf_display" revision="sirocco-sm8150" remote="sepha" />
+  <project path="hardware/qcom-caf/sm8150/media" name="platform_hardware_qcom-caf_media" revision="sirocco-sm8150" remote="sepha" />
+
+  <!-- hardware -->
+  <project path="hardware/interfaces" name="platform_hardware_interfaces" remote="sepha" />
+  <project path="hardware/qcom/wlan" name="platform_hardware_qcom_wlan" remote="sepha" />
+  <project path="hardware/ril" name="platform_hardware_ril" remote="sepha" />
+
+  <!-- packages -->
+  <project path="packages/apps/SimpleDeviceConfig" name="platform_packages_apps_SimpleDeviceConfig" remote="sepha" />
+
+  <!-- vendor -->
+  <project path="vendor/sepha" name="platform_vendor_sepha" remote="sepha" />
+
 </manifest>
